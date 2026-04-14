@@ -1,0 +1,65 @@
+Categorias de Comandos:
+
+• DDL (Definition): Comandos que criam, alteram ou excluem a estrutura de objetos (bancos, tabelas, índices).
+
+o CREATE DATABASE / TABLE: Cria um novo banco de dados ou uma nova tabela com suas respectivas colunas e tipos.
+
+o ALTER TABLE: Modifica a estrutura de uma tabela já existente (adicionar, remover ou alterar colunas).
+
+o DROP TABLE / DATABASE: Exclui permanentemente um objeto e todas as informações contidas nele.
+
+o TRUNCATE: Remove todos os registros de uma tabela, mas mantém a estrutura (colunas e tipos) intacta para novos usos.
+
+• DML (Manipulation): Comandos voltados para a manipulação dos dados armazenados (inserir, editar, apagar).
+
+o INSERT INTO: Adiciona novos registros (linhas) em uma tabela existente.
+
+o UPDATE: Altera valores de registros que já estão no banco de dados. Atenção: Quase sempre requer a cláusula WHERE.
+
+o DELETE: Remove um ou mais registros de uma tabela. Atenção: Sem a cláusula WHERE, apaga todos os dados da tabela.
+
+• DQL (Query): É a parte mais utilizada do SQL. Focada exclusivamente em buscar e visualizar informações sem alterar o estado do banco.
+
+o SELECT: O comando principal para extrair dados. Define quais colunas você deseja ver.
+
+o FROM: Indica a tabela de origem de onde os dados serão extraídos.
+
+o AS (Alias): Cria um apelido temporário para uma coluna ou tabela, facilitando a leitura do resultado.
+
+o DISTINCT: Filtra os resultados para remover duplicatas, mostrando apenas valores únicos.
+
+o AND, OR, NOT: Operadores lógicos para combinar filtros.
+
+o BETWEEN: Filtra valores dentro de um intervalo (inclusive).
+
+o IN: Filtra valores que coincidem com qualquer valor em uma lista.
+
+o IS NULL: Busca por campos que não possuem valor gravado.
+
+o LIMIT: Restringe a quantidade de linhas retornadas.
+
+• DCL (Data Control Language): Comandos utilizados para gerenciar as permissões de acesso dos usuários ao banco de dados.
+
+o GRANT: Concede privilégios específicos (como SELECT, INSERT, UPDATE) a um usuário em tabelas ou bancos específicos.
+
+o REVOKE: Remove privilégios que foram previamente concedidos a um usuário.
+
+o CREATE USER: Cria uma nova conta de usuário no servidor MySQL.
+
+o DROP USER: Remove uma conta de usuário existente.
+
+o SET PASSWORD: Altera a senha de um usuário específico.
+
+• DTL/TCL (Transaction): Comandos que gerenciam as transações para garantir a integridade (confirmar ou reverter).
+
+o START TRANSACTION (ou BEGIN): Inicia uma nova transação. A partir daqui, as alterações não são permanentes até serem confirmadas.
+
+o COMMIT: Salva permanentemente todas as alterações feitas durante a transação atual no banco de dados.
+
+o ROLLBACK: Descarta todas as alterações feitas na transação atual, retornando os dados ao estado em que estavam antes do START TRANSACTION.
+
+o SAVEPOINT: Cria um "ponto de restauração" dentro de uma transação longa, permitindo que você desfaça apenas parte dela.
+
+o ROLLBACK TO SAVEPOINT: Retorna a transação ao ponto específico marcado pelo savepoint, sem cancelar a transação inteira.
+
+o SET AUTOCOMMIT: Define se o MySQL deve salvar cada comando individual automaticamente (1) ou se aguardará um comando manual de commit (0).
