@@ -105,7 +105,7 @@ D. Outros Tipos
 
 •	BLOB: Para dados binários
 
-•	Restrições: PRIMARY KEY (Identificador único), FOREIGN KEY (Elo entre tabelas), AUTO_INCREMENT e NOT NULL.
+•	Restrições: PRIMARY KEY (Identificador único), FOREIGN KEY (Elo entre tabelas), AUTO_INCREMENT (Valor incrementado automaticamente), NOT NULL (Valores não nulos) e UNIQUE (Valores distintos).
 ________________________________________
 5. Consultas e Filtros Avançados
 
