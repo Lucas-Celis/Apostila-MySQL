@@ -1,0 +1,54 @@
+/* DML - DATA MANIPULATION LANGUAGE */
+
+/* INSERT - Irá inserir dados na tabela */
+
+/* Estrutura */
+
+INSERT INTO nome_tabela VALUES('valor1', 'v', 1234, 10.75);
+
+/* Exemplo */
+
+/* TIPOS DE INSERTs */
+
+/* FORMA 01 - OMITINDO COLUNAS */
+
+INSERT INTO CLIENTE VALUES('JOAO','M','JOAO@GMAIL.COM',988638273,'22923110','MAIA LACERDA - ESTACIO - RIO DE JANEIRO - RJ');
+
+INSERT INTO CLIENTE VALUES('CELIA','F','CELIA@GMAIL.COM',541521456,'25078869','RIACHUELO - CENTRO - RIO DE JANEIRO - RJ');
+
+INSERT INTO CLIENTE VALUES('JORGE','M',NULL,885755896,'58748895','OSCAR CURY - BOM RETIRO - PATOS DE MINAS - MG');
+
+/* FORMA 02 COLOCANDO AS COLUNAS */
+
+INSERT INTO CLIENTE(NOME,SEXO,ENDERECO,TELEFONE,CPF) VALUES('LILIAN','F','SENADOR SOARES - TIJUCA - RIO DE JANEIRO - RJ','947785696',887774856);
+
+/* FORMA 03 INSERT COMPACTO - SOMENTE NO MYSQL */
+
+INSERT INTO CLIENTE VALUES('ANA','F','ANA@GLOBO.COM',85548962,'548556985','PRES ANTONIO CARLOS - CENTRO - SAO PAULO - SP'),
+                          ('CARLA','F','CARLA@TERATI.COM.BR',7745828,'66587458','SAMUEL SILVA - CENTRO - BELO HORIZONTE - MG');
+
+/* UPDATE - Irá atualizar determinado dado da tabela (Sempre usar a cláusula WHERE pois se não usar irá alterar todas as colunas da tabela) */
+
+/* Estrutura */
+
+UPDATE nome_tabela
+SET coluna1 = dado_novo
+WHERE coluna_chave = valor_chave;
+
+/* Exemplo */
+
+UPDATE CLIENTE
+SET SEXO = 'F'
+WHERE IDCLIENTE = 7;
+
+/* DELETE - Irá deletar determinado dado da tabela */
+
+/* Estrutura */
+
+DELETE FROM nome_tabela
+WHERE coluna_chave = valor_chave;
+
+/* Exemplo */
+
+DELETE FROM CLIENTE
+WHERE IDCLIENTE = 8;
