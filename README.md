@@ -33,6 +33,16 @@ Comandos que lidam com os dados dentro das tabelas.
 DQL (Data Query Language)
 Focada na visualização dos dados.
 •	SELECT: O comando principal para projetar e filtrar informações.
+DCL (Data Control Language)
+Trata-se da sublinguagem voltada para a segurança e administração do banco de dados. É através dela que o DBA controla quem pode acessar o quê.
+•	GRANT: Concede privilégios de acesso ao usuário (ex: permitir que um usuário apenas leia dados, mas não os apague).
+•	REVOKE: Remove privilégios previamente concedidos.
+DTL / TCL (Data Transaction Language / Transaction Control Language)
+Esta sublinguagem gerencia as transações. Uma transação é uma unidade de trabalho que deve ser executada totalmente ou não ser executada de forma alguma, garantindo a integridade dos dados (conceito ACID).
+•	BEGIN / START TRANSACTION: Marca o início de uma transação.
+•	COMMIT: Salva permanentemente todas as alterações feitas durante a transação no banco de dados.
+•	ROLLBACK: Desfaz todas as alterações feitas na transação caso ocorra algum erro ou desistência.
+•	SAVEPOINT: Cria um "ponto de restauração" dentro de uma transação longa, permitindo voltar apenas até aquele ponto sem cancelar tudo.
 ________________________________________
 4. Tipos de Dados e Restrições (Constraints)
 
@@ -70,6 +80,7 @@ Triggers (Gatilhos)
 São automações que "disparam" sozinhas diante de eventos de INSERT, UPDATE ou DELETE. São fundamentais para criar tabelas de log (histórico) ou backups automáticos de segurança.
 ________________________________________
 Como usar este repositório
+
 1.	Leia a teoria aqui no README.
 2.	Navegue pela pasta /codigos para ver a sintaxe de cada comando.
 3.	Execute os arquivos .sql de exemplo no seu ambiente (MySQL Workbench, Terminal ou DBeaver) para ver os resultados na prática.
