@@ -70,11 +70,40 @@ ________________________________________
 
 A escolha do tipo de dado correto impacta a performance e a integridade do sistema:
 
-•	VARCHAR vs CHAR: O primeiro é variável, o segundo é fixo (ideal para siglas de estados, por exemplo).
+A. Tipos Numéricos
+Utilizados para cálculos e armazenamento de quantidades.
 
-•	INT e FLOAT: Para números inteiros e decimais.
+•	INT / INTEGER: Números inteiros.
 
-•	ENUM: Permite definir uma lista restrita de valores aceitos (Ex: 'S' ou 'N').
+•	FLOAT / DOUBLE: Números decimais de precisão variável.
+
+•	DECIMAL(p, s): Ideal para valores monetários (Ex: DECIMAL(10,2) armazena até 10 dígitos, com 2 após a vírgula).
+
+B. Tipos de Texto (Strings)
+Para nomes, descrições e códigos alfanuméricos.
+
+•	CHAR(n): Comprimento fixo (mais rápido para códigos curtos como UF: 'SP', 'RJ').
+
+•	VARCHAR(n): Comprimento variável (economiza espaço para nomes e e-mails).
+
+•	TEXT: Para grandes blocos de texto (descrições, artigos).
+
+•	ENUM: Uma lista de valores permitidos (Ex: 'M', 'F').
+
+C. Tipos de Data e Hora
+Cruciais para auditoria e cronogramas.
+
+•	DATE: Apenas data (AAAA-MM-DD).
+
+•	DATETIME: Data e hora combinadas.
+
+•	TIMESTAMP: Armazena a data/hora com base no fuso horário (útil para registros de criação/alteração).
+
+D. Outros Tipos
+
+•	JSON: Armazena documentos JSON nativamente, permitindo buscas dentro do objeto.
+
+•	BLOB: Para dados binários
 
 •	Restrições: PRIMARY KEY (Identificador único), FOREIGN KEY (Elo entre tabelas), AUTO_INCREMENT e NOT NULL.
 ________________________________________
