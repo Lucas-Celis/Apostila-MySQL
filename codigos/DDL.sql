@@ -1,6 +1,30 @@
 /* DDL - DATA DEFINITION LANGUAGE */
 
-/* Estrutura */
+/* Estrutura para criar banco */
+
+CREATE DATABASE nome_banco;
+
+/* Exemplo */
+
+CREATE DATABASE COMERCIO;
+
+/* COMANDO USE para entrar no banco */
+
+USE nome_banco;
+
+/* Exemplo */
+
+USE COMERCIO;
+
+/* Estrutura deletar banco */
+
+DROP DATABASE nome_banco;
+
+/* Exemplo */
+
+DROP DATABASE COMERCIO;
+
+/* Estrutura para criar tabela */
 
 CREATE TABLE nome_tabela(
   coluna1 TIPO,
@@ -43,17 +67,13 @@ MODIFY coluna1 TIPO;
 ALTER TABLE PRODUTO
 MODIFY VALOR_UNITARIO VARCHAR(50) NOT NULL;
 
-/* ADD - Adicionar uma coluna */
+/* Estrutura para deletar tabelas */
 
-/* Estrutura */
-
-ALTER TABLE nome_tabela
-ADD coluna4 TIPO;
+DROP TABLE nome_tabela;
 
 /* Exemplo */
 
-ALTER TABLE PRODUTO
-ADD PESO FLOAT(10,2);
+DROP TABLE CLIENTE;
 
 /* DROP COLUMN - Apagar uma coluna */
 
@@ -67,7 +87,19 @@ DROP COLUMN coluna1;
 ALTER TABLE PRODUTO
 DROP COLUMN PESO;
 
-/* AFTER - Inserir a coluna após outra específica da tabela */
+/* ADD - Adicionar uma coluna */
+
+/* Estrutura */
+
+ALTER TABLE nome_tabela
+ADD coluna4 TIPO;
+
+/* Exemplo */
+
+ALTER TABLE PRODUTO
+ADD PESO FLOAT(10,2);
+
+/* ADD AFTER - Inserir a coluna após outra específica da tabela */
 
 /* Estrutura */
 
@@ -81,7 +113,7 @@ ALTER TABLE PRODUTO
 ADD COLUMN PESO FLOAT(10,2) NOT NULL
 AFTER NOME_PRODUTO;
 
-/* FIRST - Inserir a coluna na primeira posição da tabela */
+/* ADD FIRST - Inserir a coluna na primeira posição da tabela */
 
 /* Estrutura */
 
