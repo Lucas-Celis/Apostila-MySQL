@@ -70,8 +70,7 @@ ________________________________________
 
 A escolha do tipo de dado correto impacta a performance e a integridade do sistema:
 
-A. Tipos Numéricos
-Utilizados para cálculos e armazenamento de quantidades.
+4.1. Tipos Numéricos. Utilizados para cálculos e armazenamento de quantidades.
 
 •	INT / INTEGER: Números inteiros.
 
@@ -79,8 +78,7 @@ Utilizados para cálculos e armazenamento de quantidades.
 
 •	DECIMAL(p, s): Ideal para valores monetários (Ex: DECIMAL(10,2) armazena até 10 dígitos, com 2 após a vírgula).
 
-B. Tipos de Texto (Strings)
-Para nomes, descrições e códigos alfanuméricos.
+4.2. Tipos de Texto (Strings). Para nomes, descrições e códigos alfanuméricos.
 
 •	CHAR(n): Comprimento fixo (mais rápido para códigos curtos como UF: 'SP', 'RJ').
 
@@ -90,8 +88,7 @@ Para nomes, descrições e códigos alfanuméricos.
 
 •	ENUM: Uma lista de valores permitidos (Ex: 'M', 'F').
 
-C. Tipos de Data e Hora
-Cruciais para auditoria e cronogramas.
+4.3. Tipos de Data e Hora. Cruciais para auditoria e cronogramas.
 
 •	DATE: Apenas data (AAAA-MM-DD).
 
@@ -99,7 +96,7 @@ Cruciais para auditoria e cronogramas.
 
 •	TIMESTAMP: Armazena a data/hora com base no fuso horário (útil para registros de criação/alteração).
 
-D. Outros Tipos
+4.5. Outros Tipos
 
 •	JSON: Armazena documentos JSON nativamente, permitindo buscas dentro do objeto.
 
@@ -109,31 +106,148 @@ D. Outros Tipos
 ________________________________________
 5. Consultas e Filtros Avançados
 
-O poder do MySQL reside na capacidade de filtrar informações específicas:
+O verdadeiro poder do MySQL não está em apenas "trazer dados", mas em refinar a busca para obter informações precisas em meio a milhões de registros.
 
-•	Filtros Lógicos: Uso de AND, OR e NOT para combinar condições.
+5.1. Filtros Lógicos e Precedência. Os operadores lógicos permitem combinar múltiplas condições no WHERE. No entanto, a ordem em que o MySQL os processa é crucial.
 
-•	Busca de Padrões: O operador LIKE com o caractere coringa % permite buscar partes de nomes ou textos.
+•	AND: Retorna verdadeiro apenas se todas as condições forem atendidas.
 
-•	Valores Nulos: Diferença entre um campo vazio e um campo NULL (ausência de valor), utilizando IS NULL ou IS NOT NULL.
+•	OR: Retorna verdadeiro se pelo menos uma das condições for atendida.
+
+•	NOT: Inverte o resultado da expressão lógica.
+
+Atenção à Precedência: O AND tem prioridade sobre o OR. Para evitar resultados inesperados, use parênteses para forçar a ordem desejada.
+
+Exemplo: WHERE (status = 'Ativo' OR status = 'Pendente') AND valor > 100 é muito diferente de WHERE status = 'Ativo' OR status = 'Pendente' AND valor > 100.
+
+5.2. Busca de Padrões (Wildcards). O operador LIKE é utilizado para buscas textuais parciais, utilizando caracteres "coringa":
+
+•	% (Percentual): Representa zero, um ou múltiplos caracteres.
+
+o	LIKE 'Ana%': Começa com Ana (Ana, Anabela, Analice).
+
+o	LIKE '%Sena': Termina com Sena (Sena, Lucena, Cassena).
+
+o	LIKE '%casa%': Contém "casa" em qualquer posição.
+
+•	_ (Underline): Representa exatamente um único caractere.
+
+o	LIKE '_ana': Encontra "Bana" ou "Cana", mas não "Anatiel".
+
+•	REGEXP (Opcional Avançado): Para buscas complexas que o LIKE não resolve, como encontrar apenas textos que começam com números ou possuem um formato específico de e-mail.
+
+5.3. O Enigma do NULL (Lógica Tri-valente). Um dos erros mais comuns em SQL é tratar NULL como se fosse um valor zero ou uma string vazia. No MySQL, NULL significa valor desconhecido.
+
+•	IS NULL: Verifica se o campo não possui valor atribuído.
+
+•	IS NOT NULL: Filtra apenas registros que possuem algum dado preenchido.
+
+•	Diferença Crucial:
+
+o	campo = '': É uma string vazia (um valor conhecido de comprimento zero).
+
+o	campo = 0: É um valor numérico real.
+
+o	campo IS NULL: É a ausência total de informação.
+
+Dica de Ouro: Nunca use = NULL ou != NULL. O SQL utiliza uma lógica de três valores (Verdadeiro, Falso e Desconhecido). Qualquer comparação direta com NULL resultará em "Desconhecido", e a linha não será exibida.
+
+5.4. Outros Operadores de Refinamento. Para deixar sua consulta mais elegante e performática, utilize estes filtros que simplificam a lógica do seu código:
+
+•	Operador IN: Substitui múltiplos usos do operador OR, verificando se o valor de uma coluna está contido em uma lista específica ou no resultado de uma subconsulta.
+o	Exemplo: WHERE uf IN ('SP', 'RJ', 'MG')
+
+•	Operador BETWEEN: Define um intervalo inclusivo (onde os valores das extremidades também contam). É extremamente útil para filtrar intervalos numéricos ou períodos de datas.
+o	Exemplo: WHERE data BETWEEN '2024-01-01' AND '2024-01-31'
+
+•	Operador EXISTS: Funciona como um teste booleano que verifica se uma subconsulta retorna qualquer linha. É geralmente mais rápido que o IN quando lidamos com grandes volumes de dados em tabelas relacionadas.
+o	Exemplo: WHERE EXISTS (SELECT 1 FROM log WHERE id_user = u.id)
 ________________________________________
 6. Funções de Agregação e Agrupamento
 
-Utilizadas para gerar relatórios e estatísticas:
+6.1. Funções de Agregação. Usadas geralmente com a cláusula GROUP BY para realizar cálculos em um conjunto de valores.
 
-•	COUNT(): Conta registros.
+•	COUNT(): Retorna o número de linhas.
 
-•	SUM(): Soma valores numéricos.
+•	SUM(): Soma os valores de uma coluna numérica.
 
-•	AVG(): Calcula a média.
+•	AVG(): Calcula a média aritmética.
 
-•	MAX() e MIN(): Identificam os valores extremos.
+•	MIN(): Retorna o menor valor.
 
-•	GROUP BY: Agrupa os resultados com base em uma coluna específica (ex: total de vendas por vendedor).
+•	MAX(): Retorna o maior valor.
+
+•	GROUP_CONCAT(): Concatena valores de múltiplas linhas em uma única string separada por vírgula.
+
+6.2. Funções de Data e Hora. Fundamentais para relatórios e filtros temporais.
+
+•	NOW(): Retorna a data e hora atuais.
+
+•	CURDATE(): Retorna apenas a data atual.
+
+•	CURTIME(): Retorna apenas a hora atual.
+
+•	DATE_FORMAT(data, formato): Formata a data (ex: %d/%m/%Y).
+
+•	DATEDIFF(d1, d2): Diferença em dias entre duas datas.
+
+•	DATE_ADD() / DATE_SUB(): Adiciona ou subtrai intervalos de tempo.
+
+•	YEAR(), MONTH(), DAY(), HOUR(): Extraem partes específicas de uma data.
+
+6.3. Funções de String (Texto). Para formatar e manipular textos.
+
+•	CONCAT(s1, s2, ...): Junta duas ou mais strings.
+
+•	UPPER() / LOWER(): Converte para maiúsculas ou minúsculas.
+
+•	TRIM(): Remove espaços inúteis no início e fim.
+
+•	LEFT(str, len) / RIGHT(str, len): Pega X caracteres da esquerda ou direita.
+
+•	SUBSTRING(str, start, len): Extrai uma parte específica do texto.
+
+•	REPLACE(): Substitui uma parte do texto por outra.
+
+•	LENGTH(): Retorna o tamanho da string em bytes.
+
+•	CHAR_LENGTH(): Retorna o número de caracteres.
+
+6.4. Funções Numéricas e Matemáticas. Para cálculos matemáticos de precisão ou arredondamento.
+
+•	ROUND(valor, decimais): Arredonda para o número de casas decimais definido.
+
+•	FLOOR(): Arredonda para baixo (inteiro).
+
+•	CEIL(): Arredonda para cima (inteiro).
+
+•	ABS(): Retorna o valor absoluto (positivo).
+
+•	MOD(n, m): Retorna o resto da divisão.
+
+•	RAND(): Gera um número aleatório entre 0 e 1.
+
+6.5. Funções de Controle e Fluxo (Lógica). Permitem criar lógica condicional diretamente no seu SELECT.
+
+•	IF(condição, valor_se_verdade, valor_se_falso): Um "se" simples.
+
+•	IFNULL(coluna, substituto): Se o valor for NULL, exibe o substituto.
+
+•	COALESCE(v1, v2, ...): Retorna o primeiro valor não nulo da lista.
+
+•	CASE: A estrutura lógica mais poderosa para múltiplas condições.
+
+-> CASE WHEN condicao THEN resultado ELSE outro END
 ________________________________________
 7. Relacionamentos (Joins)
 
-Bancos de dados relacionais brilham quando conectamos tabelas. O INNER JOIN é o método mais comum, onde trazemos apenas os dados que possuem correspondência em ambas as tabelas (ex: Clientes que possuem Endereços cadastrados).
+INNER JOIN: Retorna apenas registros que possuem correspondência em ambas as tabelas.
+
+LEFT JOIN: Retorna todos os registros da tabela da esquerda, e os correspondentes da direita. Se não houver par, retorna NULL.
+
+RIGHT JOIN: O oposto do Left Join.
+
+CROSS JOIN: Cria um produto cartesiano (combina cada linha de A com todas de B).
 ________________________________________
 8. Programação em Banco de Dados
 
@@ -142,6 +256,40 @@ São blocos de código que ficam armazenados no servidor e podem ser chamados a 
 
 Triggers (Gatilhos)
 São automações que "disparam" sozinhas diante de eventos de INSERT, UPDATE ou DELETE. São fundamentais para criar tabelas de log (histórico) ou backups automáticos de segurança.
+________________________________________
+9. Subqueries e CTEs (Common Table Expressions)
+
+Às vezes, você precisa de um resultado temporário para usar na consulta principal.
+
+Subqueries (Subconsultas)
+Podem ser usadas no WHERE ou no FROM.
+
+Ex:
+SELECT nome 
+FROM produtos 
+WHERE preco > (SELECT AVG(preco) FROM produtos);
+
+CTEs (Cláusula WITH)
+É a forma moderna e legível de fazer subconsultas. Elas funcionam como "tabelas temporárias" que existem apenas durante a execução daquela query.
+
+Ex:
+SQL
+WITH ResumoVendas AS (
+    SELECT cliente_id, SUM(total) as soma 
+    FROM pedidos 
+    GROUP BY cliente_id
+)
+SELECT * FROM ResumoVendas WHERE soma > 1000;
+________________________________________
+10. Window Functions (Funções de Janela)
+
+Introduzidas no MySQL 8.0, elas permitem cálculos em um conjunto de linhas relacionadas sem precisar de um GROUP BY que "esconda" os detalhes da linha.
+
+•	ROW_NUMBER(): Cria um ranking/numeração sequencial.
+
+•	RANK() / DENSE_RANK(): Cria rankings lidando com empates.
+
+•	OVER (PARTITION BY ...): Define o "grupo" onde o cálculo será feito.
 ________________________________________
 Como usar este repositório
 
