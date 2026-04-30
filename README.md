@@ -108,7 +108,31 @@ ________________________________________
 
 O verdadeiro poder do MySQL não está em apenas "trazer dados", mas em refinar a busca para obter informações precisas em meio a milhões de registros.
 
-5.1. Filtros Lógicos e Precedência. Os operadores lógicos permitem combinar múltiplas condições no WHERE. No entanto, a ordem em que o MySQL os processa é crucial.
+5.1. Operadores de Comparação. Estes operadores comparam o valor de uma coluna com outro valor ou com outra coluna. O resultado dessa comparação é sempre um booleano: verdadeiro ou falso.
+
+•	Igual a (=): Verifica se dois valores são exatamente iguais.
+
+o	Exemplo: WHERE preco = 50.00 (Retorna apenas o que custa exatamente 50).
+
+•	Diferente de (<> ou !=): Ambas as formas funcionam no MySQL, mas <> é o padrão oficial do SQL. Retorna tudo, exceto o valor especificado.
+
+o	Exemplo: WHERE status <> 'cancelado'
+
+•	Maior que (>) e Menor que (<): Usados para valores numéricos e datas.
+
+o	Exemplo: WHERE estoque < 10 (Filtra produtos acabando).
+
+o	Exemplo: WHERE data_criacao > '2024-01-01' (Registros deste ano).
+
+•	Maior ou Igual a (>=) e Menor ou Igual a (<=): Semelhantes aos anteriores, mas incluem o valor de referência na busca.
+
+o	Exemplo: WHERE idade >= 18 (Inclui quem tem exatamente 18 anos).
+
+•	Igual a Seguro para NULL (<=>): Este é um "truque" avançado do MySQL. Diferente do =, este operador consegue comparar valores NULL sem retornar um erro ou resultado vazio. Ele retorna 1 (verdadeiro) se ambos os valores forem NULL e 0 (falso) se apenas um for.
+
+o	Exemplo: WHERE valor_desconto <=> NULL
+
+5.2. Filtros Lógicos e Precedência. Os operadores lógicos permitem combinar múltiplas condições no WHERE. No entanto, a ordem em que o MySQL os processa é crucial.
 
 •	AND: Retorna verdadeiro apenas se todas as condições forem atendidas.
 
@@ -120,7 +144,7 @@ Atenção à Precedência: O AND tem prioridade sobre o OR. Para evitar resultad
 
 Exemplo: WHERE (status = 'Ativo' OR status = 'Pendente') AND valor > 100 é muito diferente de WHERE status = 'Ativo' OR status = 'Pendente' AND valor > 100.
 
-5.2. Busca de Padrões (Wildcards). O operador LIKE é utilizado para buscas textuais parciais, utilizando caracteres "coringa":
+5.3. Busca de Padrões (Wildcards). O operador LIKE é utilizado para buscas textuais parciais, utilizando caracteres "coringa":
 
 •	% (Percentual): Representa zero, um ou múltiplos caracteres.
 
@@ -136,7 +160,7 @@ o	LIKE '_ana': Encontra "Bana" ou "Cana", mas não "Anatiel".
 
 •	REGEXP (Opcional Avançado): Para buscas complexas que o LIKE não resolve, como encontrar apenas textos que começam com números ou possuem um formato específico de e-mail.
 
-5.3. O Enigma do NULL (Lógica Tri-valente). Um dos erros mais comuns em SQL é tratar NULL como se fosse um valor zero ou uma string vazia. No MySQL, NULL significa valor desconhecido.
+5.4. O Enigma do NULL (Lógica Tri-valente). Um dos erros mais comuns em SQL é tratar NULL como se fosse um valor zero ou uma string vazia. No MySQL, NULL significa valor desconhecido.
 
 •	IS NULL: Verifica se o campo não possui valor atribuído.
 
@@ -152,7 +176,7 @@ o	campo IS NULL: É a ausência total de informação.
 
 Dica de Ouro: Nunca use = NULL ou != NULL. O SQL utiliza uma lógica de três valores (Verdadeiro, Falso e Desconhecido). Qualquer comparação direta com NULL resultará em "Desconhecido", e a linha não será exibida.
 
-5.4. Outros Operadores de Refinamento. Para deixar sua consulta mais elegante e performática, utilize estes filtros que simplificam a lógica do seu código:
+5.5. Outros Operadores de Refinamento. Para deixar sua consulta mais elegante e performática, utilize estes filtros que simplificam a lógica do seu código:
 
 •	Operador IN: Substitui múltiplos usos do operador OR, verificando se o valor de uma coluna está contido em uma lista específica ou no resultado de uma subconsulta.
 
