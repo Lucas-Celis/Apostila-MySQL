@@ -265,20 +265,30 @@ Subqueries (Subconsultas)
 Podem ser usadas no WHERE ou no FROM.
 
 Ex:
+
 SELECT nome 
+
 FROM produtos 
+
 WHERE preco > (SELECT AVG(preco) FROM produtos);
 
 CTEs (Cláusula WITH)
 É a forma moderna e legível de fazer subconsultas. Elas funcionam como "tabelas temporárias" que existem apenas durante a execução daquela query.
 
 Ex:
+
 SQL
+
 WITH ResumoVendas AS (
+
     SELECT cliente_id, SUM(total) as soma 
+    
     FROM pedidos 
+    
     GROUP BY cliente_id
+    
 )
+
 SELECT * FROM ResumoVendas WHERE soma > 1000;
 ________________________________________
 10. Window Functions (Funções de Janela)
