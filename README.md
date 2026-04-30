@@ -155,12 +155,15 @@ Dica de Ouro: Nunca use = NULL ou != NULL. O SQL utiliza uma lógica de três va
 5.4. Outros Operadores de Refinamento. Para deixar sua consulta mais elegante e performática, utilize estes filtros que simplificam a lógica do seu código:
 
 •	Operador IN: Substitui múltiplos usos do operador OR, verificando se o valor de uma coluna está contido em uma lista específica ou no resultado de uma subconsulta.
+
 o	Exemplo: WHERE uf IN ('SP', 'RJ', 'MG')
 
 •	Operador BETWEEN: Define um intervalo inclusivo (onde os valores das extremidades também contam). É extremamente útil para filtrar intervalos numéricos ou períodos de datas.
+
 o	Exemplo: WHERE data BETWEEN '2024-01-01' AND '2024-01-31'
 
 •	Operador EXISTS: Funciona como um teste booleano que verifica se uma subconsulta retorna qualquer linha. É geralmente mais rápido que o IN quando lidamos com grandes volumes de dados em tabelas relacionadas.
+
 o	Exemplo: WHERE EXISTS (SELECT 1 FROM log WHERE id_user = u.id)
 ________________________________________
 6. Funções de Agregação e Agrupamento
