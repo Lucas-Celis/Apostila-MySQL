@@ -280,13 +280,9 @@ Ex:
 SQL
 
 WITH ResumoVendas AS (
-
     SELECT cliente_id, SUM(total) as soma 
-    
     FROM pedidos 
-    
     GROUP BY cliente_id
-    
 )
 
 SELECT * FROM ResumoVendas WHERE soma > 1000;
