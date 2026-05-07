@@ -268,27 +268,27 @@ ________________________________________
 ________________________________________
 7. Relacionamentos (Joins)
 
-INNER JOIN: Retorna apenas registros que possuem correspondência em ambas as tabelas.
+•	INNER JOIN: Retorna apenas registros que possuem correspondência em ambas as tabelas.
 
-LEFT JOIN: Retorna todos os registros da tabela da esquerda, e os correspondentes da direita. Se não houver par, retorna NULL.
+•	LEFT JOIN: Retorna todos os registros da tabela da esquerda, e os correspondentes da direita. Se não houver par, retorna NULL.
 
-RIGHT JOIN: O oposto do Left Join.
+•	RIGHT JOIN: O oposto do Left Join.
 
-CROSS JOIN: Cria um produto cartesiano (combina cada linha de A com todas de B).
+•	CROSS JOIN: Cria um produto cartesiano (combina cada linha de A com todas de B).
 ________________________________________
 8. Programação em Banco de Dados
 
-Stored Procedures
+•	Stored Procedures
 São blocos de código que ficam armazenados no servidor e podem ser chamados a qualquer momento (como funções). Facilitam a segurança e a reutilização de lógica complexa.
 
-Triggers (Gatilhos)
+•	Triggers (Gatilhos)
 São automações que "disparam" sozinhas diante de eventos de INSERT, UPDATE ou DELETE. São fundamentais para criar tabelas de log (histórico) ou backups automáticos de segurança.
 ________________________________________
 9. Subqueries e CTEs (Common Table Expressions)
 
 Às vezes, você precisa de um resultado temporário para usar na consulta principal.
 
-Subqueries (Subconsultas)
+•	Subqueries (Subconsultas)
 Podem ser usadas no WHERE ou no FROM.
 
 Ex:
@@ -299,7 +299,7 @@ FROM produtos
 
 WHERE preco > (SELECT AVG(preco) FROM produtos);
 
-CTEs (Cláusula WITH)
+•	CTEs (Cláusula WITH)
 É a forma moderna e legível de fazer subconsultas. Elas funcionam como "tabelas temporárias" que existem apenas durante a execução daquela query.
 
 Ex:
@@ -330,11 +330,11 @@ Uma View é essencialmente uma consulta SQL armazenada no banco de dados. Quando
 
 Por que usar Views?
 
-Segurança: Você pode dar acesso a uma View que contém apenas colunas "públicas", escondendo dados sensíveis (como salários ou senhas) da tabela original.
+•	Segurança: Você pode dar acesso a uma View que contém apenas colunas "públicas", escondendo dados sensíveis (como salários ou senhas) da tabela original.
 
-Simplicidade: Transforma JOINs gigantescos e complexos em um simples SELECT * FROM nome_da_view.
+•	Simplicidade: Transforma JOINs gigantescos e complexos em um simples SELECT * FROM nome_da_view.
 
-Consistência: Garante que todos na equipe usem a mesma lógica de cálculo (ex: a definição de "lucro" é a mesma para todos os relatórios).
+•	Consistência: Garante que todos na equipe usem a mesma lógica de cálculo (ex: a definição de "lucro" é a mesma para todos os relatórios).
 ________________________________________
 Como usar este repositório
 
@@ -342,4 +342,4 @@ Como usar este repositório
 2.	Navegue pela pasta /codigos para ver a sintaxe de cada comando.
 3.	Execute os arquivos .sql de exemplo no seu ambiente (MySQL Workbench, Terminal ou DBeaver) para ver os resultados na prática.
 ________________________________________
-Apostila desenvolvida para estudos de MySQL - 2026.
+Apostila desenvolvida para estudos de MySQL - Lucas Eduardo de Celis - 2026.
