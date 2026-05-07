@@ -324,6 +324,18 @@ Introduzidas no MySQL 8.0, elas permitem cálculos em um conjunto de linhas rela
 
 •	OVER (PARTITION BY ...): Define o "grupo" onde o cálculo será feito.
 ________________________________________
+11. Views: Tabelas Virtuais
+
+Uma View é essencialmente uma consulta SQL armazenada no banco de dados. Quando você consulta uma View, o MySQL executa a query subjacente em tempo real e retorna os resultados.
+
+Por que usar Views?
+
+Segurança: Você pode dar acesso a uma View que contém apenas colunas "públicas", escondendo dados sensíveis (como salários ou senhas) da tabela original.
+
+Simplicidade: Transforma JOINs gigantescos e complexos em um simples SELECT * FROM nome_da_view.
+
+Consistência: Garante que todos na equipe usem a mesma lógica de cálculo (ex: a definição de "lucro" é a mesma para todos os relatórios).
+________________________________________
 Como usar este repositório
 
 1.	Leia a teoria aqui no README.
