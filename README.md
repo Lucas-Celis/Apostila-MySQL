@@ -336,6 +336,23 @@ Por que usar Views?
 
 •	Consistência: Garante que todos na equipe usem a mesma lógica de cálculo (ex: a definição de "lucro" é a mesma para todos os relatórios).
 ________________________________________
+12. Cursores: O Processamento Linha a Linha
+
+No SQL, trabalhamos normalmente com conjuntos (Sets). No entanto, em Stored Procedures, às vezes precisamos percorrer os resultados de uma consulta para aplicar regras de negócio que não podem ser resolvidas com um simples UPDATE. É aí que entram os cursores.
+
+•	O Ciclo de Vida de um Cursor:
+Para usar um cursor, você deve seguir obrigatoriamente estes quatro passos:
+
+1.	DECLARE: Define a query que o cursor vai percorrer.
+
+2.	OPEN: Executa a query e prepara a memória.
+
+3.	FETCH: "Puxa" a próxima linha para dentro de variáveis.
+
+4.	CLOSE: Libera os recursos da memória.
+
+⚠️ Aviso de Performance: Cursores são mais lentos que operações baseadas em conjuntos. Use-os apenas quando a lógica linha a linha for estritamente necessária!
+________________________________________
 Como usar este repositório
 
 1.	Leia a teoria aqui no README.
